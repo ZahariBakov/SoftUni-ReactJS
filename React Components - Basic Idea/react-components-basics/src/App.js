@@ -1,4 +1,5 @@
 import './App.css';
+import TodoList from './components/TodoList';
 
 function App() {
     return (
@@ -8,7 +9,7 @@ function App() {
             </header>
 
             <main>
-
+                <TodoList />
             </main>
 
             <footer>
