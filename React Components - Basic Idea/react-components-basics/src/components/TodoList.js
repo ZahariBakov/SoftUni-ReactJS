@@ -51,8 +51,10 @@ function TodoList() {
 
     return (
         <>
-            { name }
-            <h2>Counter - { name }</h2>
+            { name &&  <h2>Counter - { name }</h2> }
+
+            { name || <h2> No name </h2> }
+            
             { name == 'Pesho' 
                 ? peshoHeader
                 : <h3>Nah</h3> 
