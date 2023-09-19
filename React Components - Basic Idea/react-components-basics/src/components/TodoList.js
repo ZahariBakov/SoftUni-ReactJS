@@ -31,14 +31,35 @@ function TodoList() {
     //     age: 32,
     // };
 
-    let [todo, setTodo] = useState('initial Todo');
+    let [count, setCount] = useState(0);
+    let [name, setName] = useState('');
+
+    const addButtonClickHandler = () => {
+        setCount(count + 1);
+    };
+
+    const inputChangeHandler = (e) => {
+        setName(e.target.value);
+    };
+
+    const peshoHeader = (
+        <header>
+            <h3>He is the best!</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, animi!</p>
+        </header>
+    );
 
     return (
         <>
-            <h2>Tasks</h2>
+            { name }
+            <h2>Counter - { name }</h2>
+            { name == 'Pesho' 
+                ? peshoHeader
+                : <h3>Nah</h3> 
+            }
 
             <ul>
-                <TodoListItem>{ todo }</TodoListItem>
+                <TodoListItem>{ count }</TodoListItem>
 
                 {/* {todos.map(todo => <TodoListItem>{todo}</TodoListItem>)} */}
 
@@ -48,7 +69,9 @@ function TodoList() {
                 <TodoListItem color="blue">Learn function components</TodoListItem> */}
             </ul>
 
-            <button onClick={() => console.log('clicked')}>Modify</button>
+            <input type="text" onBlur={inputChangeHandler} />
+
+            <button onClick={addButtonClickHandler}>+</button>
         </>
     );
 }

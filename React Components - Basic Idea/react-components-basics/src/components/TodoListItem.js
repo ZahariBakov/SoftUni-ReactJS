@@ -1,5 +1,13 @@
 const TodoListItem = (props) => {
-    return <li>{props.children}</li>
+    let color = 'black';
+
+    if (props.children > 0 && props.children <= 3) {
+        color = 'red';
+    } else if (props.children > 3) {
+        color = 'blue';
+    }
+
+    return <li style={{ color }}>{ props.children }</li>
 }
 
 export default TodoListItem;
