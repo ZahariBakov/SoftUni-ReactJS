@@ -1,12 +1,16 @@
-export default function PricingPlanProfessional() {
+function PricingPlan({
+    price, 
+    pricingType,
+    cardBackground,
+}) {
     return (
         <div className="col-lg-4 py-3 wow zoomIn">
-            <div className="card-pricing">
+            <div className={cardBackground}>
                 <div className="header">
-                    <div className="pricing-type">Professional</div>
+                    <div className="pricing-type">{pricingType}</div>
                     <div className="price">
                         <span className="dollar">$</span>
-                        <h1>99<span className="suffix">.99</span></h1>
+                        <h1>{price}<span className="suffix">.99</span></h1>
                     </div>
                     <h5>Per Month</h5>
                 </div>
@@ -24,3 +28,5 @@ export default function PricingPlanProfessional() {
         </div>
     );
 }
+
+export default PricingPlan;

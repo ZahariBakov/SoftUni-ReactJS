@@ -1,13 +1,17 @@
-export default function MarketingServiceCard() {
+export default function ServiceCard({
+    title,
+    description,
+    imageUrl,
+}) {
     return (
         <div className="col-lg-4">
             <div className="card-service wow fadeInUp">
                 <div className="header">
-                    <img src="/img/services/service-2.svg" alt="" />
+                    <img src={imageUrl} alt="" />
                 </div>
                 <div className="body">
-                    <h5 className="text-secondary">Content Marketing</h5>
-                    <p>We help you define your SEO objective & develop a realistic strategy with you</p>
+                    <h5 className="text-secondary">{title}</h5>
+                    <p>{description}</p>
                     <a href="service.html" className="btn btn-primary">Read More</a>
                 </div>
             </div>

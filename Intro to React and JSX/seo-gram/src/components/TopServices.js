@@ -1,17 +1,28 @@
-import MarketingServiceCard from "./MarketingServiceCard";
-import SeoServiceCard from "./SeoServiceCard";
-import ResearchServiceCard from './ResearchServiceCard'
+import ServiceCard from "./ServiceCard";
 
 export default function TopServices() {
     return (
         <div className="page-section">
             <div className="container">
                 <div className="row">
-                    <SeoServiceCard />
 
-                    <MarketingServiceCard />
+                    <ServiceCard
+                        title="SEO Consultancy"
+                        description="We help you define your SEO objective & develop a realistic strategy with you"
+                        imageUrl="/img/services/service-1.svg"
+                    />
 
-                    <ResearchServiceCard />
+                    <ServiceCard
+                        title="Content Marketing"
+                        description="We help you define your SEO objective & develop a realistic strategy with you"
+                        imageUrl="/img/services/service-2.svg"
+                    />
+
+                    <ServiceCard
+                        title="Keyword Research"
+                        description="We help you define your SEO objective & develop a realistic strategy with you"
+                        imageUrl="/img/services/service-3.svg"
+                    />
                 </div>
             </div>
         </div>
