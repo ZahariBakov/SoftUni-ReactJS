@@ -1,5 +1,19 @@
+import { useEffect } from "react";
+
 export default function TodoItem({
-    text
+    id,
+    text,
+    onDelete
 }) {
-    return <li>{text} <button onClick={() => console.log('delete')}>x</button></li>
+    console.log(`${id} - Updated`);
+    
+    useEffect(() => {
+        console.log(`${id} - Mounted`);
+
+        return () => {
+            console.log(`${id} - Unmounted`);
+        }
+    }, [id]);
+
+    return <li>{text} <button onClick={() => onDelete(id)}>x</button></li>
 }
