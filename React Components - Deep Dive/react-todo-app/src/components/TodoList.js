@@ -8,6 +8,8 @@ function TodoList() {
         { id: 3, text: "Go to the gym" },
     ]);
 
+    console.log('render');
+
     useEffect(() => {
         console.log('Mounted');
     }, []);
@@ -18,10 +20,12 @@ function TodoList() {
             text: e.target.value
         };
 
-        setTodos([
-            ...todos,
+        setTodos(state => [
+            ...state,
             todo
-        ])
+        ]);
+
+        e.target.value = '';
     };
 
     return (
