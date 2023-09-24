@@ -1,5 +1,5 @@
 // import { useEffect } from "react";
-import styles from "./TodoItem.module.css";
+import "./TodoItem.css";
 
 export default function TodoItem({
     todo,
@@ -16,10 +16,15 @@ export default function TodoItem({
     //     }
     // }, [id]);
 
+    let listItemClasses = ['todo-item'];
+    if (todo.isDone) {
+        listItemClasses.push('todo-item-done')
+    }
+
     return (
-        <li onClick={() => onClick(todo.id)} className={styles['todo-item']}>
+        <li onClick={() => onClick(todo.id)} className={listItemClasses.join(' ')} >
             {todo.text}
-            <button onClick={() => onDelete(todo.id)}>x</button>
+            <button onClick={(e) => onDelete(e, todo.id)}>x</button>
         </li>
     );
 }

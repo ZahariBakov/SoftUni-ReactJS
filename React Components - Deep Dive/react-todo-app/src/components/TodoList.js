@@ -24,17 +24,23 @@ function TodoList() {
         e.target.value = '';
     };
 
-    const deleteTodoItemClickHandler = (id) => {
+    const deleteTodoItemClickHandler = (e, id) => {
+        e.stopPropagation();
+        
         setTodos(state => state.filter(todo => todo.id != id))
     };
 
     const toggleTodoItemClickHandler = (id) => {
         setTodos(state => {
             let selectedTodo = state.find(x => x.id === id);
+            let selectedIndex = state.findIndex(x => x.id === id);
             let toggledTodo = {...selectedTodo, isDone: !selectedTodo.isDone};
-            let restTodos = state.filter(x => x.id !== id);
 
-            return [...restTodos, toggledTodo];
+            return [
+                ...state.slice(0, selectedIndex),
+                toggledTodo,
+                ...state.slice(selectedIndex + 1)
+            ];
         });
     };
 
