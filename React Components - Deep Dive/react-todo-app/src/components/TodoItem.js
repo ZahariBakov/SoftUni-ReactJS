@@ -1,19 +1,25 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
+import styles from "./TodoItem.module.css";
 
 export default function TodoItem({
-    id,
-    text,
-    onDelete
+    todo,
+    onDelete,
+    onClick,
 }) {
-    console.log(`${id} - Updated`);
-    
-    useEffect(() => {
-        console.log(`${id} - Mounted`);
+    // console.log(`${id} - Updated`);
 
-        return () => {
-            console.log(`${id} - Unmounted`);
-        }
-    }, [id]);
+    // useEffect(() => {
+    //     console.log(`${id} - Mounted`);
 
-    return <li>{text} <button onClick={() => onDelete(id)}>x</button></li>
+    //     return () => {
+    //         console.log(`${id} - Unmounted`);
+    //     }
+    // }, [id]);
+
+    return (
+        <li onClick={() => onClick(todo.id)} className={styles['todo-item']}>
+            {todo.text}
+            <button onClick={() => onDelete(todo.id)}>x</button>
+        </li>
+    );
 }
