@@ -1,46 +1,66 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import uniqid from 'uniqid';
 import TodoItem from "./TodoItem";
+import { createTodo } from '../services/todoService';
+
+const API_URL = 'http://localhost:3030/jsonstore';
 
 function TodoList() {
-    const [todos, setTodos] = useState([
-        { id: 'lmta9q76', text: "Clean my room", isDone: false },
-        { id: 'lmta9nv0 ', text: "Wash the dishes", isDone: false },
-        { id: 'lmta9llh', text: "Go to the gym", isDone: false },
-    ]);
+    const [todos, setTodos] = useState([]);
+
+    useEffect(() => {
+        fetch(`${API_URL}/todos`)
+            .then(res => res.json())
+            .then(todosResult => {
+                setTodos(Object.values(todosResult));
+            });
+    }, []);
 
     const onTodoInputBlur = (e) => {
         let todo = {
             id: uniqid(),
             text: e.target.value,
-            isDone: false,
+            isCompleted: false,
         };
 
-        setTodos(state => [
-            ...state,
-            todo
-        ]);
+        createTodo(todo)
+            .then(createdTodo => {
+                console.log(createdTodo);
+                setTodos(state => [
+                    ...state,
+                    todo
+                ]);
 
-        e.target.value = '';
+                e.target.value = '';
+            })
+            .catch(err => {
+                console.log(err);
+            })
     };
 
     const deleteTodoItemClickHandler = (e, id) => {
         e.stopPropagation();
-        
+
         setTodos(state => state.filter(todo => todo.id != id))
     };
 
     const toggleTodoItemClickHandler = (id) => {
         setTodos(state => {
-            let selectedTodo = state.find(x => x.id === id);
-            let selectedIndex = state.findIndex(x => x.id === id);
-            let toggledTodo = {...selectedTodo, isDone: !selectedTodo.isDone};
+            // let selectedTodo = state.find(x => x.id === id);
+            // let selectedIndex = state.findIndex(x => x.id === id);
+            // let toggledTodo = {...selectedTodo, isCompleted: !selectedTodo.isCompleted};
 
-            return [
-                ...state.slice(0, selectedIndex),
-                toggledTodo,
-                ...state.slice(selectedIndex + 1)
-            ];
+            // return [
+            //     ...state.slice(0, selectedIndex),
+            //     toggledTodo,
+            //     ...state.slice(selectedIndex + 1)
+            // ];
+
+            return state.map(todo =>
+                todo.id === id
+                    ? { ...todo, isCompleted: !todo.isCompleted }
+                    : todo
+            );
         });
     };
 
