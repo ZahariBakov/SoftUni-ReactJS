@@ -1,4 +1,19 @@
-const Login = () => {
+import { useHistory } from 'react-router-dom';
+
+const Login = ({
+    history
+}) => {
+    let historyHook = useHistory();
+    
+    const onFormSubmit = (e) => {
+        e.preventDefault();
+
+        // TODO: Login
+
+        history.push('/');
+        // historyHook.push('/games');
+    }
+
     return (
         <section id="login-page" className="auth">
             <form id="login">
