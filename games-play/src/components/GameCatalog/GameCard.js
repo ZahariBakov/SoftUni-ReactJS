@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 // const ratingCalculator = React.lazy(() => import('../../utils/ratingCalculator'));
 
 const GameCard = ({
