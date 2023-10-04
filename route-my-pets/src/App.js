@@ -1,32 +1,54 @@
+import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+
+import * as authService from './services/authService';
 import Header from "./components/Header";
 import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import MyPets from "./components/MyPets";
 import Create from "./components/Create";
+import { isAuthenticated } from './services/authService';
 
 function App() {
-  return (
-    <div id="container">  
-        <Header />
+    const [userInfo, setUserInfo] = useState({ isAuthenticated: false, username: '' });
 
-        <main id="site-content">
-            <Routes>
-                <Route path='/' element={<Dashboard />} />
-                <Route path='/login' element={<Login />} />
-                <Route path='/register' element={<Register />} />
-                <Route path='/my-pets' element={<MyPets />} />
-                <Route path='/create' element={<Create />} />
-            </Routes>
-        </main>
+    useEffect(() => {
+        let user = authService.getUser();
 
-        <footer id="site-footer">
-            <p>@PetMyPet</p>
-        </footer>
+        setUserInfo({
+            isAuthenticated: Boolean(user),
+            user,
+        })
+    }, []);
 
-    </div>
-  );
+    const onLogin = (username) => {
+        setUserInfo({
+            isAuthenticated: true,
+            user: username,
+        })
+    }
+
+    return (
+        <div id="container">
+            <Header {...userInfo} />
+
+            <main id="site-content">
+                <Routes>
+                    <Route path='/' element={<Dashboard />} />
+                    <Route path='/login' element={<Login onLogin={onLogin} />} />
+                    <Route path='/register' element={<Register />} />
+                    <Route path='/my-pets' element={<MyPets />} />
+                    <Route path='/create' element={<Create />} />
+                </Routes>
+            </main>
+
+            <footer id="site-footer">
+                <p>@PetMyPet</p>
+            </footer>
+
+        </div>
+    );
 }
 
 export default App;
